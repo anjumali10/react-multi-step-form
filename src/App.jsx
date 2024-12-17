@@ -16,7 +16,7 @@ function App() {
     <>
       <div className="main p-4 flex w-[100%] gap-10">
         <Navbar />
-        <div className="right relative bg-green-50 w-full h-min-[80vh] p-10 px-20">
+        <div className="right relative w-full h-min-[80vh] p-10 px-20">
           <div className="p-info">
             <h1 className='text-4xl font-bold'>Personal info</h1>
             <p className='text-coolgray mt-4'>Please provide your name, email address, and phone number</p>
@@ -41,7 +41,7 @@ function App() {
               {errors.exampleRequired && <span>This field is required</span>}
 
               <div className="footer absolute bottom-0 flex justify-between w-[85%] pb-5">
-                <button className='text-marineblue font-bold'>Go Back</button>
+                <button className='text-marineblue font-bold' type="button">Go Back</button>
                 <button className='bg-marineblue p-2 px-4 text-white rounded-md text-xs' type="submit">Next Step</button>
               </div>
             </form>
