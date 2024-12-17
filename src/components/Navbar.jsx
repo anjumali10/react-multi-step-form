@@ -4,7 +4,7 @@ import Nav_item from './Nav_item';
 
 const Navbar = () => {
     return (
-        <div className="nav relative w-[20vw]">
+        <div className="nav relative w-[26%]">
             {/* Background Image */}
             <img src={bgSidebarDesktop} alt="Background Sidebar" className="w-full h-auto" />
             {/* Steps Section */}
