@@ -1,16 +1,27 @@
 import { useForm } from "react-hook-form"
+import { useNavigate } from "react-router-dom"
 import './App.css'
 import Navbar from './components/Navbar'
 
 function App() {
+  const navigate = useNavigate();
+
+  const onSubmit = (data) => {
+    console.log(data); // Handle form submission
+    navigate('/Plan'); // Navigate to the next page after form submission
+  };
+
+  const handleGoBack = () => {
+    // Handle the 'Go Back' button (optional)
+    navigate(-1); // This takes the user to the previous page in the history
+  };
   const {
     register,
     handleSubmit,
     watch,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm()
 
-  const onSubmit = (data) => console.log(data)
 
   return (
     <>
@@ -41,8 +52,8 @@ function App() {
               {errors.exampleRequired && <span>This field is required</span>}
 
               <div className="footer absolute bottom-0 flex justify-between w-[85%] pb-5">
-                <button className='text-marineblue font-bold' type="button">Go Back</button>
-                <button className='bg-marineblue p-2 px-4 text-white rounded-md text-xs' type="submit">Next Step</button>
+                <button onClick={handleGoBack} className='text-marineblue font-bold' type="button">Go Back</button>
+                <button onClick={onSubmit} disabled = {!isValid} className='bg-marineblue p-2 px-4 text-white rounded-md text-xs'>Next Step</button>
               </div>
             </form>
           </div>
