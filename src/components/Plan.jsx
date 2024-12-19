@@ -48,8 +48,8 @@ const Plan = () => {
                             >
                                 <img className='w-8' src={iconArcade} alt="iconArcade" />
                                 <div>
-                                <p>Arcade</p>
-                                <p className='text-coolgray'>$9/mo</p>
+                                    <p>Arcade</p>
+                                    <p className='text-coolgray'>$9/mo</p>
                                 </div>
                                 <input
                                     {...register('plan')}
@@ -67,8 +67,8 @@ const Plan = () => {
                             >
                                 <img className='w-8' src={iconAdvance} alt="iconAdvance" />
                                 <div>
-                                <p>Advance</p>
-                                <p className='text-coolgray'>$9/mo</p>
+                                    <p>Advance</p>
+                                    <p className='text-coolgray'>$9/mo</p>
                                 </div>
                                 <input
                                     {...register('plan')}
@@ -86,8 +86,8 @@ const Plan = () => {
                             >
                                 <img className='w-8' src={iconPro} alt="iconPro" />
                                 <div>
-                                <p>Pro</p>
-                                <p className='text-coolgray'>$9/mo</p>
+                                    <p>Pro</p>
+                                    <p className='text-coolgray'>$9/mo</p>
                                 </div>
                                 <input
                                     {...register('plan')}
@@ -99,7 +99,7 @@ const Plan = () => {
                             </label>
 
                             <div className="footer absolute bottom-0 flex justify-between w-[85%] pb-5">
-                                <button onClick={handleGoBack} className='text-marineblue font-bold' type="button">Go Back</button>
+                                <button onClick={handleGoBack} className='text-coolgray hover:text-marineblue font-bold' type="button">Go Back</button>
                                 <button
                                     disabled={!isValid}
                                     className='bg-marineblue p-2 px-4 text-white rounded-md text-xs'

@@ -52,7 +52,7 @@ function App() {
               {errors.exampleRequired && <span>This field is required</span>}
 
               <div className="footer absolute bottom-0 flex justify-between w-[85%] pb-5">
-                <button onClick={handleGoBack} className='text-marineblue font-bold' type="button">Go Back</button>
+                <button onClick={handleGoBack} className='text-coolgray hover:text-marineblue font-bold' type="button">Go Back</button>
                 <button onClick={onSubmit} disabled = {!isValid} className='bg-marineblue p-2 px-4 text-white rounded-md text-xs'>Next Step</button>
               </div>
             </form>
