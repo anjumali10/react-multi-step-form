@@ -8,8 +8,8 @@ const Nav_item = (props) => {
     <div className='flex align-middle w-full'>
       {/* Step Icon */}
       <div className={clsx(
-        "icon mt-0.5 font-bold flex items-center justify-center w-10 h-10 bg-transparent border-2 rounded-full",
-        isActive ? 'text-marineblue border-lightblue bg-lightblue' : 'border-lightblue text-white'
+        "icon mt-0.5 font-bold flex items-center justify-center w-10 h-10 border-2 rounded-full",
+        isActive ? 'text-marineblue border-lightblue bg-lightblue' : 'border-lightblue text-white bg-transparent'
       )}>
         {number}
       </div>
