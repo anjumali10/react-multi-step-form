@@ -30,7 +30,7 @@ function App() {
         <div className="right relative w-full h-min-[80vh] p-10 px-20">
           <div className="p-info">
             <h1 className='text-4xl font-bold'>Personal info</h1>
-            <p className='text-coolgray mt-4'>Please provide your name, email address, and phone number</p>
+            <p className='text-coolgray mt-4'>Please provide your name, email address, and phone number.</p>
             <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5 pt-5">
               {/* register your input into the hook by invoking the "register" function */}
               <div className="name flex flex-col gap-1">

@@ -8,7 +8,8 @@ import iconPro from '../assets/icon-pro.svg';
 
 const Plan = () => {
     const navigate = useNavigate();
-    const [Plan, setPlan] = useState('arcade');
+    const [Plan, setPlan] = useState();
+    const [billingType, setBillingType] = useState("monthly");
 
     const handleChange = (value) => {
         if (Plan !== value) {
@@ -39,7 +40,7 @@ const Plan = () => {
                 <div className="right relative w-full h-min-[80vh] p-10 px-20">
                     <div className="plan">
                         <h1 className='text-4xl font-bold'>Select your plan</h1>
-                        <p className='text-coolgray mt-4'>You have the option of monthly or yearly billing</p>
+                        <p className='text-coolgray mt-4'>You have the option of monthly or yearly billing.</p>
                         <form className='mt-10 flex gap-5' onSubmit={handleSubmit(onSubmit)}>
                             <label
                                 onClick={() => handleChange('arcade')}
@@ -48,8 +49,9 @@ const Plan = () => {
                             >
                                 <img className='w-8' src={iconArcade} alt="iconArcade" />
                                 <div>
-                                    <p>Arcade</p>
-                                    <p className='text-coolgray'>$9/mo</p>
+                                    <p className='text-marineblue font-bold'>Arcade</p>
+                                    <p className='text-coolgray text-sm'>{billingType === 'monthly' ? '$9/mo': '$90/yr'}</p>
+                                    {billingType === 'yearly' && <span className='text-sm text-marineblue'>2 months free</span>}
                                 </div>
                                 <input
                                     {...register('plan')}
@@ -67,8 +69,9 @@ const Plan = () => {
                             >
                                 <img className='w-8' src={iconAdvance} alt="iconAdvance" />
                                 <div>
-                                    <p>Advance</p>
-                                    <p className='text-coolgray'>$9/mo</p>
+                                    <p className='text-marineblue font-bold'>Advance</p>
+                                    <p className='text-coolgray text-sm'>{billingType === 'monthly' ? '$12/mo': '$120/yr'}</p>
+                                    {billingType === 'yearly' && <span className='text-sm text-marineblue'>2 months free</span>}
                                 </div>
                                 <input
                                     {...register('plan')}
@@ -86,8 +89,9 @@ const Plan = () => {
                             >
                                 <img className='w-8' src={iconPro} alt="iconPro" />
                                 <div>
-                                    <p>Pro</p>
-                                    <p className='text-coolgray'>$9/mo</p>
+                                    <p className='text-marineblue font-bold'>Pro</p>
+                                    <p className='text-coolgray text-sm'>{billingType === 'monthly' ? '$15/mo': '$150/yr'}</p>
+                                    {billingType === 'yearly' && <span className='text-sm text-marineblue'>2 months free</span>}
                                 </div>
                                 <input
                                     {...register('plan')}
@@ -97,6 +101,37 @@ const Plan = () => {
                                     className="hidden"
                                 />
                             </label>
+                            <div className="flex self-auto absolute bottom-[150px] justify-center items-center gap-4 bg-magnolia p-3 rounded-lg w-[39%] mx-auto">
+                                {/* Monthly Label */}
+                                <span
+                                    className={`text-sm font-medium ${billingType === "monthly" ? "text-marineblue" : "text-coolgray"
+                                        }`}
+                                >
+                                    Monthly
+                                </span>
+
+                                {/* Toggle Button */}
+                                <div
+                                    className="relative w-12 h-6 bg-marineblue rounded-full cursor-pointer transition peer-checked:bg-marineblue"
+                                    onClick={() =>
+                                        setBillingType(billingType === "monthly" ? "yearly" : "monthly")
+                                    }
+                                >
+                                    <div
+                                        className={`absolute top-1 left-1 w-4 h-4 bg-white rounded-full shadow-md transition-transform ${billingType === "yearly" ? "translate-x-6" : ""
+                                            }`}
+                                    ></div>
+                                </div>
+
+                                {/* Yearly Label */}
+                                <span
+                                    className={`text-sm font-medium ${billingType === "yearly" ? "text-marineblue" : "text-coolgray"
+                                        }`}
+                                >
+                                    Yearly
+                                </span>
+                            </div>
+
 
                             <div className="footer absolute bottom-0 flex justify-between w-[85%] pb-5">
                                 <button onClick={handleGoBack} className='text-coolgray hover:text-marineblue font-bold' type="button">Go Back</button>
