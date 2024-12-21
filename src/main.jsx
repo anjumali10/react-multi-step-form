@@ -5,6 +5,7 @@ import App from './App.jsx'
 import Plan from './components/Plan'
 import Addson from './components/Addson'
 import Summary from './components/Summary'
+import Thankyou from './components/Thankyou.jsx'
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
   {
     path: '/Summary',
     element: <Summary />,
+  },
+  {
+    path: '/Thankyou',
+    element: <Thankyou/>,
   }
 ])
 
