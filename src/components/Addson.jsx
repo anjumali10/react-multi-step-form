@@ -2,9 +2,22 @@ import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
 import Navbar from "./Navbar";
 import Add_ons_card from "./add_ons_card";
+import { useState } from "react";
 
 function Addson() {
   const navigate = useNavigate();
+  const [selectedAddOns, setSelectedAddOns] = useState({
+    onlineService: false,
+    largerStorage: false,
+    customizableProfile: false,
+  });
+
+  const toggleAddOn = (addOn) => {
+    setSelectedAddOns((prevState) => ({
+      ...prevState,
+      [addOn]: !prevState[addOn],
+    }));
+  };
 
   const onSubmit = (data) => {
     console.log(data); // Handle form submission
@@ -31,8 +44,28 @@ function Addson() {
           <div className="p-info">
             <h1 className='text-4xl font-bold'>Pick add-ons</h1>
             <p className='text-coolgray mt-4 mb-9'>Add-ons help enhance your gaming experience.</p>
-            <div className="cardContainer">
-              <Add_ons_card/>
+            <div className="cardContainer flex flex-col gap-4">
+              <Add_ons_card
+                title='Online Service'
+                description='Access to multiplayer games'
+                price= {10}
+                isChecked={selectedAddOns.onlineService}
+                onChange={() => toggleAddOn('onlineService')}
+              />
+              <Add_ons_card
+                title='Larger Storage'
+                description='Extra 1TB of cloud save'
+                price= {10}
+                isChecked={selectedAddOns.largerStorage}
+                onChange={() => toggleAddOn('largerStorage')}
+              />
+              <Add_ons_card
+                title='Customizable profile'
+                description='Custom theme on your profile'
+                price= {10}
+                isChecked={selectedAddOns.customizableProfile}
+                onChange={() => toggleAddOn('customizableProfile')}
+              />
             </div>
             <div className="footer absolute bottom-0 flex justify-between w-[85%] pb-5">
               <button onClick={handleGoBack} className='text-coolgray hover:text-marineblue font-bold' type="button">Go Back</button>
