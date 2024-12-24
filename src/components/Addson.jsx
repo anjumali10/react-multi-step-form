@@ -1,5 +1,5 @@
-import { useForm } from "react-hook-form"
-import { useNavigate } from "react-router-dom"
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import Add_ons_card from "./add_ons_card";
 import { useState } from "react";
@@ -12,6 +12,27 @@ function Addson() {
     customizableProfile: false,
   });
 
+  const addOns = [
+    {
+      id: "onlineService",
+      title: "Online Service",
+      description: "Access to multiplayer games",
+      price: 10,
+    },
+    {
+      id: "largerStorage",
+      title: "Larger Storage",
+      description: "Extra 1TB of cloud save",
+      price: 10,
+    },
+    {
+      id: "customizableProfile",
+      title: "Customizable Profile",
+      description: "Custom theme on your profile",
+      price: 10,
+    },
+  ];
+
   const toggleAddOn = (addOn) => {
     setSelectedAddOns((prevState) => ({
       ...prevState,
@@ -20,70 +41,58 @@ function Addson() {
   };
 
   const onSubmit = (data) => {
-    console.log(data); // Handle form submission
-    navigate('/Summary'); // Navigate to the next page after form submission
+    console.log("Selected Add-ons: ", selectedAddOns);
+    navigate("/Summary"); // Navigate to the next page after form submission
   };
 
   const handleGoBack = () => {
-    // Handle the 'Go Back' button (optional)
     navigate(-1); // This takes the user to the previous page in the history
   };
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors, isValid },
-  } = useForm()
-
 
   return (
-    <>
-      <div className="main p-4 flex w-[100%] gap-10">
+    <div className="main flex flex-col lg:flex-row gap-10 p-4 w-full">
+      {/* Navbar */}
+      <div className="lg:w-[26%] w-full">
         <Navbar />
-        <div className="right relative w-full h-min-[80vh] p-10 px-20">
-          <div className="p-info">
-            <h1 className='text-4xl font-bold'>Pick add-ons</h1>
-            <p className='text-coolgray mt-4 mb-9'>Add-ons help enhance your gaming experience.</p>
-            <div className="cardContainer flex flex-col gap-4">
+      </div>
+
+      {/* Right Section */}
+      <div className="right flex-1 p-6 lg:p-10">
+        <div className="p-info">
+          <h1 className="text-2xl lg:text-4xl font-bold">Pick add-ons</h1>
+          <p className="text-coolgray mt-4 mb-9">
+            Add-ons help enhance your gaming experience.
+          </p>
+
+          {/* Add-ons Cards */}
+          <div className="cardContainer flex flex-col gap-4">
+            {addOns.map((addOn) => (
               <Add_ons_card
-                title='Online Service'
-                description='Access to multiplayer games'
-                price= {10}
-                isChecked={selectedAddOns.onlineService}
-                onChange={() => toggleAddOn('onlineService')}
+                key={addOn.id}
+                title={addOn.title}
+                description={addOn.description}
+                price={addOn.price}
+                isChecked={selectedAddOns[addOn.id]}
+                onChange={() => toggleAddOn(addOn.id)}
               />
-              <Add_ons_card
-                title='Larger Storage'
-                description='Extra 1TB of cloud save'
-                price= {10}
-                isChecked={selectedAddOns.largerStorage}
-                onChange={() => toggleAddOn('largerStorage')}
-              />
-              <Add_ons_card
-                title='Customizable profile'
-                description='Custom theme on your profile'
-                price= {10}
-                isChecked={selectedAddOns.customizableProfile}
-                onChange={() => toggleAddOn('customizableProfile')}
-              />
-            </div>
-            <div className="footer absolute bottom-0 flex justify-between w-[85%] pb-5">
-              <button onClick={handleGoBack} className='text-coolgray hover:text-marineblue font-bold' type="button">Go Back</button>
-              <button
-                disabled={!isValid}
-                className='bg-marineblue p-2 px-4 text-white rounded-md text-xs'
-                type="submit"
-                onClick={onSubmit}
-              >
-                Next Step
-              </button>
-            </div>
+            ))}
+          </div>
+
+          {/* Form Footer */}
+          <div className="footer absolute sm:bottom-0 flex flex-col sm:flex-row justify-between w-[85%] sm:w-[45%] sm:pb-20 pb-5 mx-auto sm:mx-0 mt-8 sm:mt-0">
+            <button onClick={handleGoBack} className='text-coolgray hover:text-marineblue font-bold' type="button">Go Back</button>
+            <button
+              onClick={onSubmit}
+              className='bg-marineblue p-2 px-4 text-white rounded-md text-xs mt-4 sm:mt-0'
+              type="submit"
+            >
+              Next Step
+            </button>
           </div>
         </div>
       </div>
-
-    </>
-  )
+    </div>
+  );
 }
 
-export default Addson
+export default Addson;
