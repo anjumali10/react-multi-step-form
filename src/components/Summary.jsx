@@ -1,40 +1,57 @@
-import { useForm } from "react-hook-form";
+// src/components/Summary.jsx
+
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
-import { useState } from "react";
 
 function Summary() {
   const navigate = useNavigate();
-  const [selectedAddOns, setSelectedAddOns] = useState({
-    onlineService: true, // Default values for demonstration
-    largerStorage: true,
-    customizableProfile: false,
-  });
+  const dispatch = useDispatch();
 
+  // Access the Redux state for selected add-ons, billing plan, and billing type
+  const { billingPlan, billingType, selectedAddOns } = useSelector(
+    (state) => state.form
+  );
+
+  // Plan details based on the Redux state
   const planDetails = {
-    name: "Arcade",
-    billing: "Monthly",
-    price: 9,
+    name: billingPlan === "arcade" ? "Arcade" : billingPlan === "advance" ? "Advanced" : "Pro",
+    billing: billingType,
+    price: billingPlan === "arcade" ? 9 : billingPlan === "advance" ? 12 : 15,
   };
 
+  // Add-ons list
   const addOnsList = [
-    { key: "onlineService", name: "Online service", price: 1 },
-    { key: "largerStorage", name: "Larger storage", price: 2 },
-    { key: "customizableProfile", name: "Customizable profile", price: 2 },
+    { key: "onlineService", name: "Online Service", price: 1 },
+    { key: "largerStorage", name: "Larger Storage", price: 2 },
+    { key: "customizableProfile", name: "Customizable Profile", price: 2 },
   ];
 
+  // Calculate total price (plan price + add-ons)
   const totalPrice =
     planDetails.price +
     addOnsList.reduce((total, addOn) => {
       return selectedAddOns[addOn.key] ? total + addOn.price : total;
     }, 0);
 
+  // Handle form submission (confirmation)
   const onSubmit = () => {
     navigate("/Thankyou"); // Navigate to the next page after confirmation
   };
 
+  // Handle go back action
   const handleGoBack = () => {
     navigate(-1); // Navigate to the previous page
+  };
+
+  // Handle change plan action
+  const handleChangePlan = () => {
+    navigate("/Plan"); // Navigate to the Plan page to change the plan
+  };
+
+  // Handle change add-ons action
+  const handleChangeAddOns = () => {
+    navigate("/Addson"); // Navigate to the Addson page to modify add-ons
   };
 
   return (
@@ -59,7 +76,7 @@ function Summary() {
                   </p>
                   <p
                     className="text-coolgray underline cursor-pointer text-sm sm:text-base"
-                    onClick={() => navigate("/Plan")}
+                    onClick={handleChangePlan}
                   >
                     Change
                   </p>

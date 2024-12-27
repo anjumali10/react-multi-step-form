@@ -6,6 +6,8 @@ import Plan from './components/Plan'
 import Addson from './components/Addson'
 import Summary from './components/Summary'
 import Thankyou from './components/Thankyou.jsx'
+import { Provider } from "react-redux";
+import store from "./redux/store";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 
@@ -36,6 +38,8 @@ const router = createBrowserRouter([
 // Render the application with RouterProvider
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router} />
-  </StrictMode>,
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
+  </StrictMode>
 )

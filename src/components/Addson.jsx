@@ -1,43 +1,47 @@
-import { useForm } from "react-hook-form";
+// src/components/Addson.jsx
+
+import { useDispatch, useSelector } from "react-redux";
+import { setSelectedAddOns } from "../redux/slice"; // Import the action
 import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import Add_ons_card from "./add_ons_card";
-import { useState } from "react";
 
 function Addson() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [selectedAddOns, setSelectedAddOns] = useState({
-    onlineService: false,
-    largerStorage: false,
-    customizableProfile: false,
-  });
+
+  // Get selected add-ons from Redux store
+  const selectedAddOns = useSelector((state) => state.form.selectedAddOns);
 
   const addOns = [
     {
       id: "onlineService",
       title: "Online Service",
       description: "Access to multiplayer games",
-      price: 10,
+      price: 1,
     },
     {
       id: "largerStorage",
       title: "Larger Storage",
       description: "Extra 1TB of cloud save",
-      price: 10,
+      price: 2,
     },
     {
       id: "customizableProfile",
       title: "Customizable Profile",
       description: "Custom theme on your profile",
-      price: 10,
+      price: 2,
     },
   ];
 
   const toggleAddOn = (addOn) => {
-    setSelectedAddOns((prevState) => ({
-      ...prevState,
-      [addOn]: !prevState[addOn],
-    }));
+    // Update the selected add-ons in the Redux store
+    dispatch(
+      setSelectedAddOns({
+        ...selectedAddOns,
+        [addOn]: !selectedAddOns[addOn],
+      })
+    );
   };
 
   const onSubmit = (data) => {
@@ -46,7 +50,7 @@ function Addson() {
   };
 
   const handleGoBack = () => {
-    navigate(-1); // This takes the user to the previous page in the history
+    navigate(-1); // Go back to the previous page
   };
 
   return (
@@ -80,10 +84,12 @@ function Addson() {
 
           {/* Form Footer */}
           <div className="footer absolute sm:bottom-0 flex flex-col sm:flex-row justify-between w-[85%] sm:w-[45%] sm:pb-20 pb-5 mx-auto sm:mx-0 mt-8 sm:mt-0">
-            <button onClick={handleGoBack} className='text-coolgray hover:text-marineblue font-bold' type="button">Go Back</button>
+            <button onClick={handleGoBack} className="text-coolgray hover:text-marineblue font-bold" type="button">
+              Go Back
+            </button>
             <button
               onClick={onSubmit}
-              className='bg-marineblue p-2 px-4 text-white rounded-md text-xs mt-4 sm:mt-0'
+              className="bg-marineblue p-2 px-4 text-white rounded-md text-xs mt-4 sm:mt-0"
               type="submit"
             >
               Next Step
